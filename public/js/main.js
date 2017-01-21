@@ -15,3 +15,17 @@ campo.on("input", function(){
 	$("#contador-caracteres").text(qtdCaracteres);
 
 });
+
+var tempoRestante = $("#tempo-digitacao").text();
+campo.one("focus", function(){
+	var cronometroID = setInterval(function(){
+		tempoRestante--;
+		console.log(tempoRestante);
+		$("#tempo-digitacao").text(tempoRestante);
+		if(tempoRestante < 1) {
+			campo.attr("disabled", true);
+			clearInterval(cronometroID);
+		}
+	},1000);
+
+});
